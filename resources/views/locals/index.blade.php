@@ -7,32 +7,32 @@
 
 @section('content')
 <div class="container">
-  <h2><center>Gestion Fonctions des Reclamations</center></h2>
+  <h2><center>Gestion des locals </center></h2>
   
-  <a href="fonctions/create"><button type="button" class="btn btn-primary right action_create">AJOUTER</button></a>
+  <a href="locals/create"><button type="button" class="btn btn-primary right action_create">AJOUTER</button></a>
              
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Fonctions</th>
+        <th>locals</th>
         <th>Actions</th>
       </tr>
       			
     </thead>
     <tbody>
-        @foreach($bfonctions as $fonctions)
+        @foreach($blocals as $locals)
       <tr>
-        <td>{{$fonctions->fonction}} </td>
+        <td>{{$locals->lieu}} </td>
         
         <td class="action_td">
   
-            <a href="fonctions/{{$fonctions->id}}/edit" class="btn btn-info btn-xs ">
+            <a href="locals/{{$locals->id}}/edit" class="btn btn-info btn-xs ">
               <i class="fas fa-edit"></i>
           </a>
                 
-         {!! Form::open(['action' => ['fonctionsController@destroy', $fonctions->id],'method'=>'DELETE']) !!}
+         {!! Form::open(['action' => ['localController@destroy', $locals->id],'method'=>'DELETE']) !!}
            
-        <a onclick="return confirm('Etes vous sûr(e) de vouloir supprimer cette reclamation ?')">
+        <a onclick="return confirm('Etes vous sûr(e) de vouloir supprimer cette local ?')">
               {{ Form::button('',['type' => 'submit', 'class' => 'btn btn-danger btn-xs fas fa-trash-alt'] )  }}
             
            </a>

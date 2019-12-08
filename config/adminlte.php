@@ -259,7 +259,7 @@ return [
         ],
         [
             'text'       => 'Lieu',
-            'url'  => 'lieus',
+            'url'  => 'locals',
             'icon_color' => 'yellow',
         ],
         [

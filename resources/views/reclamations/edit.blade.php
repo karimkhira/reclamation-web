@@ -17,7 +17,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
                 <div class="box box-solid box-success">
                     <div class="box-header">
                         <h3 class="box-title">Modifier un Reclamation</h3>
@@ -26,21 +26,16 @@
     
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
     
-                                {!! Form::open(['action' => ['Admin\reclamationcontroller@update',$breclamation->id], 'method' => 'PUT']) !!}
+                                {!! Form::open(['action' => ['reclamationsController@update',$breclamation->id], 'method' => 'PUT']) !!}
+                                
                                 <div class="form-group">
-                                    {!! Form::label('date Reclamation', 'Date Reclamation') !!}
-                                    {!! Form::text('Date Reclamation',$breclamation->Creer à, ['class' => 'form-control', 'placeholder' => 'Saisir le nom du reclamation','required' => 'required']) !!}
+                                    {!! Form::label('message', 'Reclamation') !!}
+                                    {!! Form::textarea('message',$breclamation->message, ['class' => 'form-control', 'placeholder' => 'modifier la reclamation','required' => 'required']) !!}
                                 </div>
-                                <div class="form-group">
-                                    {!! Form::label('list', 'List') !!}
-                                    {!! Form::text('list',$breclamation->List, ['class' => 'form-control', 'placeholder' => 'Saisir le prénom du reclamation','required' => 'required']) !!}
-                                </div>
-                                <div class="form-group">
-                                    {!! Form::label('message', 'Message') !!}
-                                    {!! Form::text('message',$breclamation->Message, ['class' => 'form-control', 'placeholder' => 'Saisir le prénom du reclamation','required' => 'required']) !!}
-                                </div>
+
+                               
                             </div>
     
                         </div>
@@ -55,7 +50,7 @@
                             <div class="row">
                             
                                 <div class="form-group">
-                                    {!! Form::submit('Ajouter', ['class' => 'btn btn-success']) !!}
+                                    {!! Form::submit('Modifier', ['class' => 'btn btn-success']) !!}
                                 </div>
                             </div>
                             {!! Form::close() !!}

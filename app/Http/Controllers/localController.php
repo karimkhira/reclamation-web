@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\controller;
 use Illuminate\Http\Request;
-
-class lieusController extends Controller
+use App\local;
+class localController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,8 @@ class lieusController extends Controller
      */
     public function index()
     {
-        //
+        $nots = local::paginate(5);
+        return view ('locals.index')->with('blocals',$nots);
     }
 
     /**
@@ -22,8 +23,9 @@ class lieusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { 
+       
+        return view('locals.create');
     }
 
     /**
@@ -34,7 +36,19 @@ class lieusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'locals' => 'required',
+            
+            
+        ]);
+
+        $nlocals = new local;
+        $nlocals->lieu = $request->input('locals');
+        
+        
+        $nlocals->save();
+       
+        return redirect('locals');
     }
 
     /**
@@ -56,7 +70,8 @@ class lieusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mlocal = local::find($id);
+        return view('locals.edit')->with('blocal',$mlocal);
     }
 
     /**
@@ -69,6 +84,17 @@ class lieusController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'local' => 'required',
+            
+        ]);
+
+        $mlocal = local::find($id);
+        $mlocal->lieu = $request->input('local');
+        
+        $mlocal->save();
+       
+        return redirect('locals');
     }
 
     /**
@@ -79,6 +105,8 @@ class lieusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dlocals = local::find($id);
+        $dlocals->delete();
+        return redirect('locals');
     }
 }

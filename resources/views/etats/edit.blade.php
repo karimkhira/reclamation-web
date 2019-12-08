@@ -1,6 +1,3 @@
-
-
-
 @extends('adminlte::page')
 
 @section('title', 'AdminLTE')
@@ -8,22 +5,22 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Modifier notification
-            <small>Modifier une Notification</small>
+            Modifier etat
+            <small>Modifier une Etat</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/"><i class="fa fa-dashboard"></i> Accueil</a></li>
-            <li class="active">Modifier Notification</li>
+            <li class="active">Modifier Etat</li>
         </ol>
     </section>
     
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
                 <div class="box box-solid box-success">
                     <div class="box-header">
-                        <h3 class="box-title">Modifier une Notification</h3>
+                        <h3 class="box-title">Modifier une Etat</h3>
                     </div>
                     <!-- /.box-header -->
     
@@ -31,10 +28,10 @@
                         <div class="row">
                             <div class="col-md-6">
     
-                                {{ Form::open(['action' => ['Admin\notificationcontroller@update',$bnotification->id], 'method' => 'PUT'])}}
+                                {{ Form::open(['action' => ['etatsController@update',$betat->id], 'method' => 'PUT'])}}
                                 <div class="form-group">
-                                    {!! Form::label('notification', 'Notification') !!}
-                                    {!! Form::text('notification',$bnotification->TexteNotif, ['class' => 'form-control', 'required' => 'required']) !!}
+                                    {!! Form::label('etat', 'Etat') !!}
+                                    {!! Form::text('etat',$betat->etat, ['class' => 'form-control', 'required' => 'required']) !!}
                                 </div>
                                 
                             </div>

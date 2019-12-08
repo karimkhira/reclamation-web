@@ -70,7 +70,8 @@ class etatsController extends Controller
      */
     public function edit($id)
     {
-        
+        $metat = etats::find($id);
+        return view('etats.edit')->with('betat',$metat);
     }
 
     /**
@@ -83,6 +84,17 @@ class etatsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'etat' => 'required',
+            
+        ]);
+
+        $metat = etats::find($id);
+        $metat->etat = $request->input('etat');
+        
+        $metat->save();
+       
+        return redirect('etats');
     }
 
     /**

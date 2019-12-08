@@ -1,55 +1,48 @@
+
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title')
 
 
 
 @section('content')
 <div class="container">
-  <h2><center>Gestion des Specialite</center></h2>
+  <h2><center>Gestion des Specialites </center></h2>
   
-  <a href="specialite/create"><button type="button" class="btn btn-primary right action_create">AJOUTER</button></a>
+  <a href="specialites/create"><button type="button" class="btn btn-primary right action_create">AJOUTER</button></a>
              
   <table class="table table-hover">
     <thead>
       <tr>
-       
-        <th>Specialite</th>
-        <th>Description</th>
+        <th>Specialites</th>
         <th>Actions</th>
       </tr>
       			
     </thead>
     <tbody>
-        @foreach($bspecialite as $specialite)
+        @foreach($bspecialites as $specialites)
       <tr>
-        <td>{{$specialite->Specialite}} </td>
-        <td>{{$specialite->Description}} </td>
+        <td>{{$specialites->specialite}} </td>
+        
         <td class="action_td">
+  
+            <a href="specialites/{{$specialites->id}}/edit" class="btn btn-info btn-xs ">
+              <i class="fas fa-edit"></i>
+          </a>
+                
+         {!! Form::open(['action' => ['specialitesController@destroy', $specialites->id],'method'=>'DELETE']) !!}
+           
+        <a onclick="return confirm('Etes vous sûr(e) de vouloir supprimer cette specialite ?')">
+              {{ Form::button('',['type' => 'submit', 'class' => 'btn btn-danger btn-xs fas fa-trash-alt'] )  }}
+            
+           </a>
+         
+         
+         {!! Form::close() !!}
 
-            <a href="specialite/{{$specialite->id}}/edit" class="btn btn-info btn-xs">
-              <i class="glyphicon glyphicon-edit"></i>
-          </a>
-          <a type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal-supp">
-              <i class="glyphicon glyphicon-trash"></i>
-          </a>
-          <div class="modal modal-danger fade" id="modal-supp">
-              {!! Form::open(['action' => ['Admin\specialitecontroller@destroy',
-              $specialite->id],'method'=>'DELETE']) !!}
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h4 class="modal-title" >Suppression Specialite</h4>
-                      </div>
-                      <div class="modal-body" style="color:#D33724!important;background-color: white!important">
-                        <p> êtes-vous sûr de vouloir supprimer cette Spécialité ?</p>
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-outline pull-left"
-                              data-dismiss="modal">Non</button>
-                          <button type="submit" class="btn btn-outline">Oui</button>
-                      </div>
-                  </td>
+
+
+         </td>
       </tr>
       @endforeach    
     </tbody>

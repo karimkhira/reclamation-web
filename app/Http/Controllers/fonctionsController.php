@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\controller;
 use Illuminate\Http\Request;
-
+use App\fonctions;
 class fonctionsController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class fonctionsController extends Controller
      */
     public function index()
     {
-        //
+        $nots = fonctions::paginate(5);
+        return view ('fonctions.index')->with('bfonctions',$nots);
     }
 
     /**
@@ -22,8 +23,9 @@ class fonctionsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { 
+       
+        return view('fonctions.create');
     }
 
     /**
@@ -34,7 +36,19 @@ class fonctionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'fonctions' => 'required',
+            
+            
+        ]);
+
+        $nfonctions = new fonctions;
+        $nfonctions->fonction = $request->input('fonctions');
+        
+        
+        $nfonctions->save();
+       
+        return redirect('fonctions');
     }
 
     /**
@@ -56,7 +70,8 @@ class fonctionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mfonction = fonctions::find($id);
+        return view('fonctions.edit')->with('bfonction',$mfonction);
     }
 
     /**
@@ -69,6 +84,17 @@ class fonctionsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'fonction' => 'required',
+            
+        ]);
+
+        $mfonction = fonctions::find($id);
+        $mfonction->fonction = $request->input('fonction');
+        
+        $mfonction->save();
+       
+        return redirect('fonctions');
     }
 
     /**
@@ -79,6 +105,8 @@ class fonctionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dfonctions = fonctions::find($id);
+        $dfonctions->delete();
+        return redirect('fonctions');
     }
 }

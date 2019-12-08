@@ -22,7 +22,31 @@ Route::get('/home', function() {
 
 Route::resource('etats', 'etatsController');
 Route::resource('fonctions', 'fonctionsController');
-Route::resource('lieus', 'lieusController');
+Route::resource('locals', 'localController');
 Route::resource('reclamations', 'reclamationsController');
-Route::resource('roles', 'rolessController');
+Route::resource('roles', 'rolesController');
 Route::resource('specialites', 'specialitesController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

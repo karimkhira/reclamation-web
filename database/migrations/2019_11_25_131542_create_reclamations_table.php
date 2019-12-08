@@ -18,8 +18,7 @@ class CreateReclamationsTable extends Migration
             $table->string('message');
             $table->unsignedBigInteger('usercreation_id');
                     $table->foreign('usercreation_id')->references('id')->on('users');
-            $table->unsignedBigInteger('lieu_id');
-                    $table->foreign('lieu_id')->references('id')->on('lieus');
+           
             $table->unsignedBigInteger('etat_id');
                     $table->foreign('etat_id')->references('id')->on('etats');
             $table->unsignedBigInteger('userreparation_id');

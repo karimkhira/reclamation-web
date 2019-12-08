@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\controller;
 use Illuminate\Http\Request;
-
+use App\roles;
 class rolesController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class rolesController extends Controller
      */
     public function index()
     {
-        //
+        $nots = roles::paginate(5);
+        return view ('roles.index')->with('broles',$nots);
     }
 
     /**
@@ -22,8 +23,9 @@ class rolesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { 
+       
+        return view('roles.create');
     }
 
     /**
@@ -34,7 +36,19 @@ class rolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'roles' => 'required',
+            
+            
+        ]);
+
+        $nroles = new roles;
+        $nroles->role = $request->input('roles');
+        
+        
+        $nroles->save();
+       
+        return redirect('roles');
     }
 
     /**
@@ -56,7 +70,8 @@ class rolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mrole = roles::find($id);
+        return view('roles.edit')->with('brole',$mrole);
     }
 
     /**
@@ -69,6 +84,17 @@ class rolesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'role' => 'required',
+            
+        ]);
+
+        $mrole = roles::find($id);
+        $mrole->role = $request->input('role');
+        
+        $mrole->save();
+       
+        return redirect('roles');
     }
 
     /**
@@ -79,6 +105,8 @@ class rolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $droles = roles::find($id);
+        $droles->delete();
+        return redirect('roles');
     }
 }

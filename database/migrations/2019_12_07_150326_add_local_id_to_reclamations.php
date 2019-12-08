@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLieusTable extends Migration
+class AddLocalIdToReclamations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateLieusTable extends Migration
      */
     public function up()
     {
-        Schema::create('lieus', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('lieu');
-            $table->timestamps();
+        Schema::table('reclamations', function (Blueprint $table) {
+            $table->unsignedBigInteger('locals_id');
+                    $table->foreign('locals_id')->references('id')->on('locals');
         });
     }
 
@@ -27,6 +26,8 @@ class CreateLieusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lieus');
+        Schema::table('reclamations', function (Blueprint $table) {
+            //
+        });
     }
 }

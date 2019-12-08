@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\controller;
 use Illuminate\Http\Request;
-
+use App\specialites;
 class specialitesController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class specialitesController extends Controller
      */
     public function index()
     {
-        //
+        $nots = specialites::paginate(5);
+        return view ('specialites.index')->with('bspecialites',$nots);
     }
 
     /**
@@ -22,8 +23,9 @@ class specialitesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { 
+       
+        return view('specialites.create');
     }
 
     /**
@@ -34,7 +36,19 @@ class specialitesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'specialites' => 'required',
+            
+            
+        ]);
+
+        $nspecialites = new specialites;
+        $nspecialites->specialite = $request->input('specialites');
+        
+        
+        $nspecialites->save();
+       
+        return redirect('specialites');
     }
 
     /**
@@ -56,7 +70,8 @@ class specialitesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mspecialite = specialites::find($id);
+        return view('specialites.edit')->with('bspecialite',$mspecialite);
     }
 
     /**
@@ -69,6 +84,17 @@ class specialitesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'specialite' => 'required',
+            
+        ]);
+
+        $mspecialite = specialites::find($id);
+        $mspecialite->specialite = $request->input('specialite');
+        
+        $mspecialite->save();
+       
+        return redirect('specialites');
     }
 
     /**
@@ -79,6 +105,8 @@ class specialitesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dspecialites = specialites::find($id);
+        $dspecialites->delete();
+        return redirect('specialites');
     }
 }
